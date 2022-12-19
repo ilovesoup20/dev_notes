@@ -1,3 +1,4 @@
+[home](README.md)
 # Python Notes
 
 ## Setting up Python
@@ -31,11 +32,11 @@ Link - https://docs.python.org/3/tutorial/venv.html
 $ python3 -m venv venv-test
 
 # Activate virtual environment
-path $ source /venv-test/bin/activate
-(venv-test) path $ # Environment is activated
+$ source /venv-test/bin/activate
+(venv-test) $ # Environment is activated
 
 # To exit vitrual environment
-(venv-test) path $ deactivate 
+(venv-test) $ deactivate 
 ```
 ---
 ## Python logging
