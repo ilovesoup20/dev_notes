@@ -22,7 +22,9 @@ $ sls invoke --stage <stage name> -f <function name>
 ```
 ---
 ## Links
+[Serverless Plugin Scripts](https://www.serverless.com/plugins/serverless-plugin-scripts)
 
+[Serverless Lifecycle Events and Commands](https://gist.github.com/HyperBrain/50d38027a8f57778d5b0f135d80ea406)
 ### 12/19/2022
 [AWS Lambda Runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
 ### 12/16/2022
@@ -55,7 +57,6 @@ $ sls invoke --stage <stage name> -f <function name>
 
 [Lambda execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)
 
-[]
 
 ## Notes
 

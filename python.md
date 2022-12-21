@@ -2,7 +2,7 @@
 # Python Notes
 
 ## Setting up Python
-pyenv - https://github.com/pyenv/pyenv
+- pyenv - https://github.com/pyenv/pyenv
 ```python
 # Install pyenv using brew
 $ brew install pyenv
@@ -25,7 +25,7 @@ $ sudo pip install awscli awscli-local
 ---
 
 ## Using Python Virtual Environment
-Link - https://docs.python.org/3/tutorial/venv.html
+- https://docs.python.org/3/tutorial/venv.html
 
 ```python
 # Create virtual environment
@@ -56,10 +56,17 @@ openssl sha1 <file>
 ```
 
 ---
+## Python wheels
+- [What Are Python Wheels and Why Should You Care?](https://realpython.com/python-wheels/)
 
+---
+
+## PIP Requirements File Format
+- [requirements file format](https://pip.pypa.io/en/stable/reference/requirements-file-format/)
+---
 ## Links
-[Pigar](https://github.com/damnever/pigar)
-[Pipreqs](https://github.com/bndr/pipreqs)
+- [Pigar](https://github.com/damnever/pigar)
+- [Pipreqs](https://github.com/bndr/pipreqs)
 
 ```bash
 > pip install \
@@ -77,3 +84,22 @@ openssl sha1 <file>
 
 > pip install 'xkcdpass==1.2.5' --force-reinstall
 ```
+
+---
+## Pillow wheels
+
+- https://github.com/python-pillow/pillow-wheels/releases
+
+---
+## How to install pip wheel packages for a different platform
+- [stackoverflow](https://stackoverflow.com/questions/59057335/how-to-install-pip-wheel-packages-for-a-different-platform)
+```sh
+> pip install -r requirements_platform_dependent_wheels.txt --plaform LukasOS --only-binary=:all: -t some_build_dir
+```
+---
+## Conditional packages in requirements.txt
+- [stackoverflow](https://stackoverflow.com/questions/29222269/is-there-a-way-to-have-a-conditional-requirements-txt-file-for-my-python-applica)
+
+---
+## sys.platform values
+- [sys.platform values](https://docs.python.org/3/library/sys.html#sys.platform)
