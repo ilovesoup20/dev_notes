@@ -1,2 +1,0 @@
-# Containerize an application
-

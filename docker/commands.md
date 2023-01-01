@@ -7,7 +7,7 @@ $ docker build -t getting-started .
 # Start app container
 # `-d`: run in detached mode
 # `-p`: map port between host and container
-# docker run -dp 3000:3000 getting-started
+$ docker run -dp 3000:3000 getting-started
 
 # See running containers
 $ docker ps
