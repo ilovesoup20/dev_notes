@@ -22,9 +22,14 @@
 - 
 
 ## Secrets Manager
-aa
+- 비밀이랑 배포 싸이클이랑 decouple 할수 있어서 좋다
+- 비밀을 AWS 에 저장 해놓으면 runtime 때 불러다 쓴다
+- 비밀을 쉽게 바꿀수 있다
+- 비밀 rotation 을 할수 있어 비밀 유출이 되도 리스크를 줄일수 있다
+- 비밀은 한곳에 저장 해놓고 여러 서비스에서 불러 써도 된다
+  - 비밀을 복제 안해도 된다
 
-## 참고 자료
+## 참고 자료
 - Managing secrets
   - https://www.doppler.com/blog/why-syncing-env-files-doesnt-scale-for-secrets-management
   - https://www.opensourceforu.com/2022/02/managing-secrets-with-secretsfoundry/
