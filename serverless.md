@@ -126,5 +126,3 @@ Hardcoding CloudFront distribution in serverless.yml or have serverless generate
 >              Action: sts:AssumeRole
 >```
 ---
-
-![abad](/images/meme.jpeg)
