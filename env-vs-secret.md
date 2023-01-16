@@ -29,6 +29,11 @@
 - 비밀은 한곳에 저장 해놓고 여러 서비스에서 불러 써도 된다
   - 비밀을 복제 안해도 된다
 
+### 주의햐야할 점 (리스크)
+- 비밀 한번 잘못 바꾸면 여러 서비스 장애 생길수 있음
+  - 비밀 바꿀수 있는 권한 또는 절차를 까다롭게 만들어야함
+  - 아무나 못 바꾸게 해야됨
+
 ## 참고 자료
 - Managing secrets
   - https://www.doppler.com/blog/why-syncing-env-files-doesnt-scale-for-secrets-management
