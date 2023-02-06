@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <style>
+        div {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root" style="position:absolute;margin:10px;width:100%;height:100%;border:none"></div>
+
+    <script>
+        console.log(1)
+        function round(n) {
+            return Math.round(n * 100) / 100
+        }
+
+        $(function () {
+            console.log(2)
+
+            let aspectRatios = [[16, 9], [1, 1], [4, 5], [2, 3], [21, 9], [19.5, 9]];
+            let sizes = [32, 64, 128, 256, 512, 1024, 2048];
+
+            aspectRatios.sort((a, b) => {
+                return a[1] - b[1]
+            });
+
+            for (let i = 0; i < aspectRatios.length; i++) {
+                let a = aspectRatios[i][0]
+                let b = aspectRatios[i][1]
+
+                let s = Math.min(a, b)
+                let l = Math.max(a, b)
+                let sum = s + l
+
+                let shortRatio = s / sum
+                let longRatio = l / sum
+
+
+
+                for (let j = 0; j < sizes.length; j++) {
+                    let size = sizes[j]
+                    let shortLength = size
+                    let longLength = round(l * shortLength / s)
+
+                    console.log(shortLength + " " + longLength)
+
+                    $("#root").append($('<div/>', {
+                        'style': 'position:absolute;width:' + shortLength + 'px;height:' + longLength + 'px'
+                    }))
+                }
+            }
+            // $('#root').append($('<div/>', {
+            //     'style': 'width:50px;height:50px'
+            // }))
+        })
+    </script>
+</body>
+
+</html>
