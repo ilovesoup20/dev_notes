@@ -7,6 +7,19 @@
         div {
             border: 1px solid black;
         }
+
+        span.a {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            /* left: 10px; */
+        }
+
+        span.b {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
     </style>
 </head>
 
@@ -20,7 +33,6 @@
         }
 
         $(function () {
-            console.log(2)
 
             let aspectRatios = [[16, 9], [1, 1], [4, 5], [2, 3], [21, 9], [19.5, 9]];
             let sizes = [32, 64, 128, 256, 512, 1024, 2048];
@@ -29,34 +41,38 @@
                 return a[1] - b[1]
             });
 
-            for (let i = 0; i < aspectRatios.length; i++) {
-                let a = aspectRatios[i][0]
-                let b = aspectRatios[i][1]
+            for (let j = 0; j < sizes.length; j++) {
+                let size = sizes[j]
+                let shortLength = size
 
-                let s = Math.min(a, b)
-                let l = Math.max(a, b)
-                let sum = s + l
+                for (let i = 0; i < aspectRatios.length; i++) {
+                    let a = aspectRatios[i][0]
+                    let b = aspectRatios[i][1]
 
-                let shortRatio = s / sum
-                let longRatio = l / sum
+                    let s = Math.min(a, b)
+                    let l = Math.max(a, b)
+                    let sum = s + l
 
+                    let shortRatio = s / sum
+                    let longRatio = l / sum
 
-
-                for (let j = 0; j < sizes.length; j++) {
-                    let size = sizes[j]
-                    let shortLength = size
                     let longLength = round(l * shortLength / s)
 
                     console.log(shortLength + " " + longLength)
 
-                    $("#root").append($('<div/>', {
-                        'style': 'position:absolute;width:' + shortLength + 'px;height:' + longLength + 'px'
-                    }))
+                    let div = $('<div/>', {
+                        text: shortLength,
+                        style: 'text-align:right;position:absolute;width:' + shortLength + 'px;height:' + longLength + 'px'
+                    })
+
+                    let span2 = $('<span/>', {
+                        text: longLength,
+                        class: "b"
+                    });
+                    div.append(span2);
+                    $("#root").append(div)
                 }
             }
-            // $('#root').append($('<div/>', {
-            //     'style': 'width:50px;height:50px'
-            // }))
         })
     </script>
 </body>
