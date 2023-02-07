@@ -4,8 +4,23 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <style>
+        #root {
+            position: absolute;
+            margin: 10px;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         div {
             border: 1px solid black;
+        }
+
+        div.box {
+            margin: 0 auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%)
         }
 
         span.a {
@@ -14,17 +29,19 @@
             left: 0;
             /* left: 10px; */
         }
-
-        span.b {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-        }
     </style>
 </head>
 
 <body>
-    <div id="root" style="position:absolute;margin:10px;width:100%;height:100%;border:none"></div>
+    <div id="root">
+        <!-- <div style="width:200px;height:200px">
+            <div class="box" style="width:100px; height:100px;">
+                <div class="box" style="width:50px; height:50px;">
+
+                </div>
+            </div>
+        </div> -->
+    </div>
 
     <script>
         function round(n) {
@@ -32,47 +49,101 @@
         }
 
         $(function () {
+            // let aspectRatios = [[16, 9]];
+            // let sizes = [32, 64, 128, 256, 512, 1024].reverse();
 
             let aspectRatios = [[16, 9], [1, 1], [4, 5], [2, 3], [21, 9], [19.5, 9]];
-            let sizes = [32, 64, 128, 256, 512, 1024, 2048];
+            let sizes = [32, 64, 128, 256, 512, 1024].reverse();
 
-            aspectRatios.sort((a, b) => {
-                return a[1] - b[1]
+
+            let result = {};
+
+            sizes.forEach(size => {
+                let boxes = [];
+                let shortSide = size;
+
+                aspectRatios.forEach(ratio => {
+                    let a = ratio[0];
+                    let b = ratio[1];
+
+                    let s = Math.min(a, b);
+                    let l = Math.max(a, b);
+
+                    let longSide = l * shortSide / s;
+
+                    boxes.push([shortSide, longSide])
+                });
+
+                boxes.sort((a, b) => {
+                    return a[0] - b[0];
+                });
+
+                result[size] = boxes;
             });
 
-            for (let j = 0; j < sizes.length; j++) {
-                let size = sizes[j]
-                // let shortLength = size
-                let longLength = size
+            // let prev = null;
+            // sizes.forEach(size => {
+            //     let dims = result[size];
 
-                for (let i = 0; i < aspectRatios.length; i++) {
-                    let a = aspectRatios[i][0]
-                    let b = aspectRatios[i][1]
+            //     dims.forEach(dim => {
+            //         let width = dim[0];
+            //         let height = dim[1];
 
-                    let s = Math.min(a, b)
-                    let l = Math.max(a, b)
-                    let sum = s + l
+            //         console.log(dim)
 
-                    let shortRatio = s / sum
-                    let longRatio = l / sum
+            //         let div = $('<div/>', {
+            //             text: "",
+            //             class: "box",
+            //             style: 'width:' + width + 'px;height:' + height + 'px'
+            //         })
 
-                    let shortLength = round(s * longLength / l)
+            //         if (!prev) {
+            //             $("#root").append(div);
+            //             prev = div;
+            //         }
+            //         else {
+            //             prev.append(div);
+            //             prev = div;
+            //         }
+            //     });
+            // });
 
-                    console.log(shortLength + " " + longLength)
-
-                    let div = $('<div/>', {
-                        text: longLength,
-                        style: 'text-align:right;position:absolute;width:' + shortLength + 'px;height:' + longLength + 'px'
-                    })
-
-                    let span2 = $('<span/>', {
-                        text: shortLength,
-                        class: "b"
-                    });
-                    div.append(span2);
-                    $("#root").append(div)
-                }
+            let boxes = [];
+            for (const [key, val] of Object.entries(result)) {
+                boxes = boxes.concat(val);
             }
+
+            boxes.sort((a, b) => {
+                let diff = b[1] - a[1];
+
+                if (diff === 0)
+                    return b[0] - a[0]
+
+                return diff
+
+
+            })
+            console.log(boxes)
+
+            let prev = null
+            boxes.forEach(b => {
+                let width = b[0];
+                let height = b[1];
+
+                let div = $('<div/>', {
+                    text: "",
+                    class: "box",
+                    style: "width:" + width + "px; height:" + height + "px"
+                })
+                if (!prev) {
+                    $("#root").append(div)
+                    prev = div
+                }
+                else {
+                    prev.append(div)
+                    prev = div;
+                }
+            })
         })
     </script>
 </body>
