@@ -1,0 +1,151 @@
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <style>
+        #root {
+            position: absolute;
+            margin: 10px;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        div {
+            border: 1px solid black;
+        }
+
+        div.box {
+            margin: 0 auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%)
+        }
+
+        span.a {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            /* left: 10px; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <!-- <div style="width:200px;height:200px">
+            <div class="box" style="width:100px; height:100px;">
+                <div class="box" style="width:50px; height:50px;">
+
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <script>
+        function round(n) {
+            return Math.round(n * 100) / 100
+        }
+
+        $(function () {
+            // let aspectRatios = [[16, 9]];
+            // let sizes = [32, 64, 128, 256, 512, 1024].reverse();
+
+            let aspectRatios = [[16, 9], [1, 1], [4, 5], [2, 3], [21, 9], [19.5, 9]];
+            let sizes = [32, 64, 128, 256, 512, 1024].reverse();
+
+
+            let result = {};
+
+            sizes.forEach(size => {
+                let boxes = [];
+                let longSide = size;
+
+                aspectRatios.forEach(ratio => {
+                    let a = ratio[0];
+                    let b = ratio[1];
+
+                    let s = Math.min(a, b);
+                    let l = Math.max(a, b);
+
+                    let shortSide = s * longSide / l;
+
+                    boxes.push([shortSide, longSide])
+                });
+
+                boxes.sort((a, b) => {
+                    return a[0] - b[0];
+                });
+
+                result[size] = boxes;
+            });
+
+            // let prev = null;
+            // sizes.forEach(size => {
+            //     let dims = result[size];
+
+            //     dims.forEach(dim => {
+            //         let width = dim[0];
+            //         let height = dim[1];
+
+            //         console.log(dim)
+
+            //         let div = $('<div/>', {
+            //             text: "",
+            //             class: "box",
+            //             style: 'width:' + width + 'px;height:' + height + 'px'
+            //         })
+
+            //         if (!prev) {
+            //             $("#root").append(div);
+            //             prev = div;
+            //         }
+            //         else {
+            //             prev.append(div);
+            //             prev = div;
+            //         }
+            //     });
+            // });
+
+            let boxes = [];
+            for (const [key, val] of Object.entries(result)) {
+                boxes = boxes.concat(val);
+            }
+
+            boxes.sort((a, b) => {
+                let diff = b[1] - a[1];
+
+                if (diff === 0)
+                    return b[0] - a[0]
+
+                return diff
+
+
+            })
+            console.log(boxes)
+
+            let prev = null
+            boxes.forEach(b => {
+                let width = b[0];
+                let height = b[1];
+
+                let div = $('<div/>', {
+                    text: "",
+                    class: "box",
+                    style: "width:" + width + "px; height:" + height + "px"
+                })
+                if (!prev) {
+                    $("#root").append(div)
+                    prev = div
+                }
+                else {
+                    prev.append(div)
+                    prev = div;
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

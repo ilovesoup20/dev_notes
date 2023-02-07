@@ -11,7 +11,7 @@
         span.a {
             position: absolute;
             bottom: 0;
-            right: 0;
+            left: 0;
             /* left: 10px; */
         }
 
@@ -42,7 +42,8 @@
 
             for (let j = 0; j < sizes.length; j++) {
                 let size = sizes[j]
-                let shortLength = size
+                // let shortLength = size
+                let longLength = size
 
                 for (let i = 0; i < aspectRatios.length; i++) {
                     let a = aspectRatios[i][0]
@@ -55,17 +56,17 @@
                     let shortRatio = s / sum
                     let longRatio = l / sum
 
-                    let longLength = round(l * shortLength / s)
+                    let shortLength = round(s * longLength / l)
 
                     console.log(shortLength + " " + longLength)
 
                     let div = $('<div/>', {
-                        text: shortLength,
+                        text: longLength,
                         style: 'text-align:right;position:absolute;width:' + shortLength + 'px;height:' + longLength + 'px'
                     })
 
                     let span2 = $('<span/>', {
-                        text: longLength,
+                        text: shortLength,
                         class: "b"
                     });
                     div.append(span2);
